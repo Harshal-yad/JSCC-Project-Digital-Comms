@@ -26,13 +26,15 @@ JSCC-Project-Digital-Comms/
 ├── JSCC_6g.ipynb                        # main project notebook
 ├── poster/
 │   └── 6G_JSCC_A3_Poster.pptx
+|   └── 6G_JSCC_A3_Poster.pdf
 ├── presentation/
 │   └── 6G_JSCC_Project_Presentation.pptx
+|   └── 6G_JSCC_Project_Presentation.pdf
 ├── report/
 │   └── Task_Aware_Dynamic_Semantic_Compression_Mini_Project_Report.docx
+|   └── Task_Aware_Dynamic_Semantic_Compression_Mini_Project_Report.pdf
 ├── results/
 │   ├── figures/
-│   └── metrics/
 └── (optional local dataset folder)
 ```
 
