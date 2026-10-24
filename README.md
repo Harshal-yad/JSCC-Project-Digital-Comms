@@ -1,122 +1,118 @@
-# 6G JSCC: Bandwidth-Optimized Dual-Mode Architecture
+# JSCC Project: Digital Communications
 
-A reproducible research-style demonstration of a dual-mode semantic communication system for 6G-style wireless image transmission. This project compares:
+This repository contains a research-oriented notebook and supporting materials for a 6G joint source-channel coding (JSCC) and semantic communication study. The project explores a dual-mode communication pipeline where the system transmits either:
 
-- Human mode: transmits a compressed latent representation for image reconstruction.
-- Machine mode: transmits a compact semantic feature vector for downstream classification.
+- a human-oriented latent representation for image reconstruction, or
+- a machine-oriented semantic representation for downstream task execution.
 
-The notebook explores how the system behaves under additive white Gaussian noise (AWGN), compares human and machine performance, and visualizes the trade-off between reconstruction fidelity and communication bandwidth.
+The work is designed to illustrate the trade-off between reconstruction fidelity and task efficiency under noisy wireless communication channels.
 
-## Why this project matters
+## Project overview
 
-In future wireless networks, not all traffic is meant for human consumption. Some content will be interpreted by machines, while other data must still be reconstructed visually. This repository illustrates a simple but useful idea:
+The main notebook, `JSCC_6g.ipynb`, is a reproducible demonstration of a dual-mode semantic communication system for 6G-style digital communications. It focuses on:
 
-- keep a low-bandwidth semantic representation for machine tasks,
-- keep a richer latent representation for human-centered reconstruction,
-- evaluate both under realistic channel conditions.
+- transmitting compressed representations over a noisy channel,
+- comparing human and machine communication modes,
+- evaluating performance under varying signal-to-noise ratios (SNR),
+- analyzing the effectiveness of semantic communication versus traditional digital transmission.
 
-It is designed as a compact educational and research demonstration rather than a production telecom stack.
+The repository also includes the written report, presentation slides, poster, and generated result artifacts used for the project.
 
 ## Repository structure
 
 ```text
 JSCC-Project-Digital-Comms/
 ├── README.md
-├── 6g_jscc_dual_architecture_demo.ipynb
-├── traffic_data/                     # expected local dataset folder
-└── results/
-    └── figures/
-        ├── figure1_qualitative_human_reconstructions.png
-        ├── figure2_performance_vs_snr.png
-        ├── figure3_jscc_vs_digital_cliff_effect.png
-        └── figure4_bandwidth_comparison.pdf
+├── JSCC_6g.ipynb                        # main project notebook
+├── poster/
+│   └── 6G_JSCC_A3_Poster.pptx
+├── presentation/
+│   └── 6G_JSCC_Project_Presentation.pptx
+├── report/
+│   └── Task_Aware_Dynamic_Semantic_Compression_Mini_Project_Report.docx
+├── results/
+│   ├── figures/
+│   └── metrics/
+└── (optional local dataset folder)
 ```
 
-## What is implemented
+## What the notebook covers
 
-The notebook contains a full demonstration of:
+The notebook demonstrates several core ideas in semantic and wireless communication research:
 
-- dataset loading for a two-class traffic image dataset,
-- VAE-based latent compression for the human mode,
-- compact 128-D semantic encoder for the machine mode,
-- AWGN channel simulation across SNR values,
-- performance evaluation for reconstruction quality and classification accuracy,
-- bandwidth comparison against raw image transmission,
-- publication-style figure generation.
+- latent representation learning for image reconstruction,
+- compact task-aware semantic encoding for machine inference,
+- AWGN channel simulation,
+- performance analysis across multiple SNR values,
+- comparison between semantic transmission and conventional digital communication,
+- visual and quantitative evaluation of system behavior.
 
-## Core concept
+## Human vs machine mode
 
 ### Human mode
 
-The human branch uses a frozen Stable Diffusion VAE to encode images into a latent space. This representation is transmitted over an AWGN channel and then decoded to reconstruct the image.
+This mode prioritizes perceptual fidelity and reconstructs the original image from a compressed latent representation.
 
 ### Machine mode
 
-The machine branch uses a lightweight encoder to produce a 128-dimensional feature vector. The classifier receives this vector under noisy channel conditions and predicts the traffic class.
+This mode prioritizes task utility by compressing the input into a lightweight semantic embedding that can be used for classification or inference.
 
-### Observed trade-off
-
-The notebook explicitly illustrates the common semantic communication trade-off:
-
-- human mode preserves visual fidelity with higher payload size,
-- machine mode offers dramatically smaller payload and strong task performance,
-- both degrade as SNR decreases, with the digital baseline showing a harsh cliff effect.
-
-## Expected setup
-
-This project expects a local dataset folder named `traffic_data` in the repository root. The notebook uses `ImageFolder` structure with class directories such as:
-
-```text
-traffic_data/
-├── highway/
-│   ├── image_001.png
-│   └── ...
-└── urban/
-    ├── image_001.png
-    └── ...
-```
+This dual-mode setup highlights the central idea behind semantic communications: a representation optimized for the communication goal may be more efficient than transmitting raw data directly.
 
 ## Requirements
 
-Python 3.10+ is recommended.
+The project is implemented in Python and is intended for Jupyter Notebook-based execution.
 
-Install the main dependencies with:
+Recommended environment:
 
 ```bash
-pip install torch torchvision diffusers matplotlib seaborn scikit-learn numpy
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+pip install torch torchvision torchaudio numpy matplotlib seaborn scikit-learn diffusers jupyter
 ```
 
-If you are using a GPU, ensure your CUDA-enabled PyTorch build is installed.
+Depending on the notebook implementation and model dependencies, additional libraries may be required. If you are using a GPU, install a CUDA-enabled PyTorch build for better performance.
 
-## Quick start
+## Getting started
 
-1. Clone the repository.
-2. Place your dataset in `./traffic_data`.
-3. Open `6g_jscc_dual_architecture_demo.ipynb` in Jupyter or VS Code.
-4. Run the notebook cells in order.
-5. Generated figures will be saved under `results/figures/`.
+1. Clone the repository:
 
-## Generated outputs
+```bash
+git clone https://github.com/Harshal-yad/JSCC-Project-Digital-Comms.git
+cd JSCC-Project-Digital-Comms
+```
 
-The notebook creates publication-style plots for:
+2. Open the notebook in Jupyter or VS Code:
 
-- qualitative image reconstructions in human mode,
-- performance vs. SNR for reconstruction and classification,
-- comparison with a digital cliff effect baseline,
-- bandwidth savings relative to raw RGB transmission.
+```bash
+jupyter notebook JSCC_6g.ipynb
+```
 
-## Research note
+3. Run the notebook cells in order.
 
-This repository is a compact demonstration and educational reference. It is not intended to be a standards-compliant modem, source codec, or full end-to-end wireless communication simulator. The implementation is designed to be easy to read, reproducible, and visually interpretable.
+4. Review generated outputs in the `results/` folder.
+
+## Output artifacts
+
+The project includes:
+
+- a report in `report/`
+- presentation slides in `presentation/`
+- a poster in `poster/`
+- figure and metric outputs under `results/`
+
+These materials are useful for both understanding the methodology and presenting the project in academic or research-oriented settings.
+
+## Notes
+
+- This repository is primarily a research/demo project rather than a production communication library.
+- Some experiments may depend on a local dataset or generated assets that are not included in the GitHub repository.
+- The notebook is the main source of the implementation and experimentation flow.
 
 ## License
 
-This repository does not currently declare a license file. If you plan to reuse or distribute it, verify whether a license is intended before publishing or extending the work.
+This repository does not currently include an explicit license file. If you plan to reuse, publish, or extend the project, confirm whether a license is intended before distributing it publicly.
 
 ## Acknowledgments
 
-This work builds on the ideas of joint source-channel coding and semantic communication, using a VAE-based encoder and a compact task-oriented transmission pipeline for a simple image classification scenario.
-
-## Contributing
-
-Pull requests and improvements are welcome. If you extend the model, improve the plots, or add a cleaner dataset pipeline, please open a contribution with a clear description of the change.
+This project builds on concepts from joint source-channel coding, semantic communication, and 6G wireless system design. It is intended as a compact educational and research demonstration of how communication systems can be optimized for both human and machine-oriented tasks.
